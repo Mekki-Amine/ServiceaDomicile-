@@ -37,5 +37,11 @@ public class UtilisateurController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable Long id) {
         utilisateurService.deleteById(id);
+
+    }
+
+    @PutMapping("/{id}")
+    public Utilisateur updateUser(@PathVariable Long id, @RequestBody Utilisateur user) {
+        return utilisateurService.updateUser(id, user);
     }
 }

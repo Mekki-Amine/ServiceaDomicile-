@@ -19,4 +19,6 @@ public interface IUtilisateurService {
 
         public void deleteById(Long id) ;
 
+        public Utilisateur updateUser(Long id, Utilisateur user);
+
 }

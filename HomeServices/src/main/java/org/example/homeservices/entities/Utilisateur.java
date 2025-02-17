@@ -67,6 +67,14 @@ public abstract class Utilisateur implements Serializable , UserDetails {
     private String verificationCodeEmail;
     private String verificationCodeTelephone;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
