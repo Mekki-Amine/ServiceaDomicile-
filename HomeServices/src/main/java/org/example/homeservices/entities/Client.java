@@ -19,4 +19,6 @@ public class Client extends Utilisateur {
     private List<Reservation> reservations;
     @OneToMany(mappedBy = "client")
     private List<Paiement> paiements;
+
+
 }
