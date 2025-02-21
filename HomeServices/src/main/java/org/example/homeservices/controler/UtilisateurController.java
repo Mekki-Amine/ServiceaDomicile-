@@ -1,4 +1,6 @@
-package org.example.homeservices.controller;
+package org.example.homeservices.controler;
+
+import lombok.RequiredArgsConstructor;
 
 import org.example.homeservices.entities.Utilisateur;
 import org.example.homeservices.services.IUtilisateurService;
@@ -11,12 +13,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/utilisateurs")
+@RequiredArgsConstructor
 public class UtilisateurController {
 
     @Autowired
-    private IUtilisateurService UtilisateurService;
-    @Autowired
-    private org.example.homeservices.services.UtilisateurService utilisateurService;
+    private IUtilisateurService utilisateurService;
+
 
     @GetMapping
     public List<Utilisateur> findAll() {
@@ -29,9 +31,12 @@ public class UtilisateurController {
         return utilisateur.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
-    public Utilisateur save(@RequestBody Utilisateur utilisateur) {
-        return utilisateurService.save(utilisateur);
+
+
+    @PostMapping("/register/requestUser")
+    public ResponseEntity<Utilisateur>  creatCompte(@RequestBody Utilisateur requestUser) {
+        Utilisateur newUser = utilisateurService.creatCompte(requestUser);
+        return ResponseEntity.ok(newUser);
     }
 
     @DeleteMapping("/{id}")

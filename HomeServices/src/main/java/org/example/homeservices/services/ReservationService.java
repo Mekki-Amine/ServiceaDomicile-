@@ -31,11 +31,8 @@ public class ReservationService implements IReservationService {
         reservationRepository.deleteById(id);
     }
     @Override
-    public List<Reservation> findByClientId(Long clientId) {
-        return reservationRepository.findByClientId(clientId);
+    public List<Reservation> findByUtilisateurId(Long Id) {
+        return reservationRepository.findByUtilisateurId(Id);
     }
-    @Override
-    public List<Reservation> findByOperateurId(Long operateurId) {
-        return reservationRepository.findByOperateurId(operateurId);
-    }
+
 }

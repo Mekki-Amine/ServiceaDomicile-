@@ -6,14 +6,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 
 @Getter
@@ -22,12 +25,10 @@ import java.util.Date;
 @NoArgsConstructor
 @Builder
 @Entity
+@Data
+@RequiredArgsConstructor
 
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class Utilisateur implements Serializable , UserDetails {
-
-    @Serial
-    private static final long serialVersionUID = 1L;
+public class Utilisateur implements Serializable , UserDetails {
 
 
     @Id
@@ -43,9 +44,10 @@ public abstract class Utilisateur implements Serializable , UserDetails {
     @NotNull
     private Date dateNaissance;
 
-    private Character sexe;
     @NotBlank
+    private Character sexe;
 
+    @NotBlank
     private String adresse;
 
     @Email
@@ -61,14 +63,42 @@ public abstract class Utilisateur implements Serializable , UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @CreationTimestamp
+    private LocalDateTime creationDate;
+
+    @UpdateTimestamp
+    private LocalDateTime modificationDate;
+
+
     private boolean isEmailVerified;
     private boolean isPhoneVerified;
 
     private String verificationCodeEmail;
     private String verificationCodeTelephone;
 
-    public Long getId() {
-        return id;
+    @Embedded
+    private Location location;
+
+    @NotBlank
+    private String specialite;
+
+    private boolean disponible;
+
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Reservation> reservations ;
+
+    @ManyToOne
+    private Servicees serviceees;
+
+
+    @OneToMany(mappedBy = "utilisateur")
+    private List<Paiement> paiements;
+
+
+    @Embeddable
+    public class Location {
+        private Double latitude;
+        private Double longitude;
     }
 
     public void setId(Long id) {
@@ -79,27 +109,16 @@ public abstract class Utilisateur implements Serializable , UserDetails {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getNom() {
         return nom;
     }
-    public void setNom(String nom) {}
 
     public String getPassword() {
         return password;
     }
-    public void setPassword(String password) {}
 
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

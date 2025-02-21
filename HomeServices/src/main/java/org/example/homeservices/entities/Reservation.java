@@ -32,8 +32,7 @@ public class Reservation implements Serializable {
     private StatutReservation statut; // CONFIRMEE, EN_COURS, TERMINEE
 
     @ManyToOne
-    private Client client ;
+    private Utilisateur utilisateur ;
 
-    @ManyToOne
-    private Operateur operateur;
+
 }

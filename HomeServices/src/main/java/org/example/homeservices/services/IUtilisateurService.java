@@ -1,5 +1,6 @@
 package org.example.homeservices.services;
 
+
 import org.example.homeservices.entities.Utilisateur;
 
 
@@ -15,7 +16,7 @@ public interface IUtilisateurService {
 
         public Optional<Utilisateur> findById(Long id) ;
 
-        public Utilisateur save(Utilisateur utilisateur) ;
+        public Utilisateur creatCompte(Utilisateur requestUser) ;
 
         public void deleteById(Long id) ;
 

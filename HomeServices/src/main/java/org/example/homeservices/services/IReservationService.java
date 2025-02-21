@@ -16,7 +16,6 @@ public interface IReservationService {
 
     public void deleteById(Long id) ;
 
-    public List<Reservation> findByClientId(Long clientId) ;
+    public List<Reservation> findByUtilisateurId(Long Id) ;
 
-    public List<Reservation> findByOperateurId(Long operateurId) ;
 }

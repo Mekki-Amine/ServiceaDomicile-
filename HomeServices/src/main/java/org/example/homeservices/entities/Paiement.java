@@ -16,18 +16,22 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Paiement implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     private Double montant;
+
     @NotBlank
     private String modePaiement; // PayPal , Carte Bancaire
+
     @Enumerated(EnumType.STRING)
     private StatutPaiement statut; // PAYE, EN_ATTENTE
 
     @ManyToOne
-    private Client client;
+    private Utilisateur utilisateur;
 
     @OneToOne
     @JoinColumn(name = "reservation")

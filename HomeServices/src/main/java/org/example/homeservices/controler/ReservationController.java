@@ -39,14 +39,11 @@ public class ReservationController {
     }
 
     @GetMapping("/client/{clientId}")
-    public List<Reservation> findByClientId(@PathVariable Long clientId) {
-        return reservationService.findByClientId(clientId);
+    public List<Reservation> findByUtilisateurtId(@PathVariable Long clientId) {
+        return reservationService.findByUtilisateurId(clientId);
     }
 
-    @GetMapping("/operateur/{operateurId}")
-    public List<Reservation> findByOperateurId(@PathVariable Long operateurId) {
-        return reservationService.findByOperateurId(operateurId);
-    }
+
 
 }
 

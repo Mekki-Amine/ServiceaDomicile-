@@ -37,6 +37,6 @@ public  class Servicees implements Serializable {
     private String description;
 
     @OneToMany( mappedBy = "serviceees")
-    private List<Operateur> operateurs ;
+    private List<Utilisateur> utilisateurs ;
 
 }
